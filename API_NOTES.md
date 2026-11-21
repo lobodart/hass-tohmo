@@ -29,7 +29,14 @@ Observed on 2026-11-20 (Next.js build `TlK3-LKUTX8-Sy52upCpd`). Undocumented API
 | `/api/contracts` | contract per station (`relatedResource.id`): `status`, `startDate`, `item{offer, monthlyFee, pricePerKwhPeak, pricePerKwhOffPeak, currency}` |
 | `/api/invoices` | invoices: `amount`, `currency`, `status` (paid/pending), `type` (subscription/installation), `issuedAt`, `dueAt`, `paidAt`; PDF: `/api/invoices/{id}/pdf` |
 | `/api/me/preferences` | `stationSettings[stationId].label` = station name shown in the app |
-| `POST /api/stations/{id}/actions/{action}` | actions: `eco`, `continuous`, `launch-session`, `stop-session`, `unlock-cable`, `reboot`, `toggle-auth`, `enforce-power`; only those listed in `availableActions` are allowed (e.g. toggle-eco/toggle-continuous). **Never tested.** |
+| `POST /api/stations/{id}/actions/{action}` | `{action}` is the name listed in `availableActions`: `toggle-eco`, `toggle-continuous`, `start-session`, `stop-session`, `unlock`, `reboot`, `toggle-auth`, `enforce-power`. Unknown action: `400 INVALID_ACTION`. See *Station actions* below. |
+
+## Station actions
+Tested on 2026-11-22 with `toggle-continuous` and `toggle-eco` only.
+- Request: `POST /api/stations/{id}/actions/toggle-continuous`, no body, same headers as GET calls.
+- Response: `202 {"stationId": "...", "command": "toggle-continuous", "status": "pending"}`.
+- Outcome: `lastAction` of `/api/stations/{id}/state` becomes `{"action": "continuous", "status": "completed", "requestedAt", "updatedAt"}` within ~4 s (`failed` if the station refuses), and `chargingMode` changes. `lastAction.action` is the bare mode (`eco`/`continuous`), not the `toggle-` name. The web app tells its own request apart by comparing `requestedAt` with the previous `lastAction`.
+- Both toggles stay in `availableActions` whatever the current mode.
 
 ## Time zones (checked on more than 1,000 sessions)
 - `ecoSchedules`: French local times ("01:26"), as shown in the app.

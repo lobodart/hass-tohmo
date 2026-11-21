@@ -42,6 +42,15 @@
         "name": "Off-peak hours"
       }
     },
+    "select": {
+      "charging_mode": {
+        "name": "Charging mode",
+        "state": {
+          "eco": "Eco",
+          "continuous": "Continuous"
+        }
+      }
+    },
     "sensor": {
       "energy_total": {
         "name": "Total energy"
@@ -107,6 +116,17 @@
       "pending_invoices": {
         "name": "Pending invoices"
       }
+    }
+  },
+  "exceptions": {
+    "mode_not_available": {
+      "message": "Tohmo does not allow switching this station to {mode} mode right now."
+    },
+    "mode_change_error": {
+      "message": "Could not change the charging mode: {error}"
+    },
+    "mode_change_failed": {
+      "message": "The station refused to switch to {mode} mode."
     }
   }
 }

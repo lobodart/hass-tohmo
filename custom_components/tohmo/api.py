@@ -28,6 +28,7 @@ SESSION_COOKIE = "__Secure-neon-auth.session_token"
 USER_AGENT = "Mozilla/5.0 (compatible; HomeAssistant-Tohmo)"
 REQUEST_TIMEOUT = aiohttp.ClientTimeout(total=30)
 PAGE_SIZE = 200  # Server-side maximum.
+CHARGING_MODES = ("eco", "continuous")
 
 _CHUNK_RE = re.compile(r"/_next/static/chunks/[A-Za-z0-9_.~-]+\.js")
 _SIGNIN_ACTION_RE = re.compile(
@@ -163,8 +164,14 @@ class TohmoClient:
 
     # ------------------------------------------------------------------- api
 
-    async def _request(self, path: str, params: dict[str, Any] | None = None) -> Any:
-        """GET an API path, signing in again once if the session expired."""
+    async def _request(
+        self, path: str, params: dict[str, Any] | None = None, *, method: str = "GET"
+    ) -> Any:
+        """Call an API path, signing in again once if the session expired.
+
+        A 401 means the request was not processed, so retrying it is safe
+        even for a POST.
+        """
         if self._token is None:
             async with self._login_lock:
                 if self._token is None:
@@ -172,7 +179,7 @@ class TohmoClient:
 
         for attempt in (1, 2):
             token = self._token
-            status, data = await self._get_json(path, params, token)
+            status, data = await self._fetch(method, path, params, token)
             if status != 401:
                 break
             if attempt == 2:
@@ -184,11 +191,15 @@ class TohmoClient:
                     await self._login()
 
         if status >= 400:
-            raise TohmoConnectionError(f"{path} returned HTTP {status}")
+            raise TohmoConnectionError(f"{method} {path} returned HTTP {status}")
         return data
 
-    async def _get_json(
-        self, path: str, params: dict[str, Any] | None, token: str | None
+    async def _fetch(
+        self,
+        method: str,
+        path: str,
+        params: dict[str, Any] | None,
+        token: str | None,
     ) -> tuple[int, Any]:
         headers = {
             "X-Tenant-Slug": TENANT_SLUG,
@@ -196,8 +207,13 @@ class TohmoClient:
             "User-Agent": USER_AGENT,
             "Cookie": f"{SESSION_COOKIE}={token}",
         }
+        if method != "GET":
+            # Same as the web app, which sends no body for station actions.
+            headers["Content-Type"] = "application/json"
+            headers["Origin"] = self._base_url
         try:
-            async with self._session.get(
+            async with self._session.request(
+                method,
                 f"{self._base_url}{path}",
                 params=params,
                 headers=headers,
@@ -208,7 +224,7 @@ class TohmoClient:
                     return resp.status, None
                 return resp.status, await resp.json(content_type=None)
         except (aiohttp.ClientError, TimeoutError, ValueError) as err:
-            raise TohmoConnectionError(f"GET {path} failed: {err}") from err
+            raise TohmoConnectionError(f"{method} {path} failed: {err}") from err
 
     async def get_me(self) -> dict[str, Any]:
         """Return the current user."""
@@ -221,6 +237,20 @@ class TohmoClient:
     async def get_station_state(self, station_id: str) -> dict[str, Any]:
         """Return the live state of a station."""
         return await self._request(f"/api/stations/{station_id}/state")
+
+    async def set_charging_mode(self, station_id: str, mode: str) -> dict[str, Any]:
+        """Ask a station to switch to `eco` or `continuous` charging.
+
+        The action is `toggle-<mode>` (as listed in `availableActions`); Tohmo
+        answers 202 with `status: pending`. The outcome then shows in
+        `lastAction` of the station state, whose `action` is the bare mode
+        and `status` becomes `completed` or `failed` within seconds.
+        """
+        if mode not in CHARGING_MODES:
+            raise ValueError(f"Unknown charging mode: {mode}")
+        return await self._request(
+            f"/api/stations/{station_id}/actions/toggle-{mode}", method="POST"
+        ) or {}
 
     async def get_sessions_page(self, page: int = 1) -> dict[str, Any]:
         """Return one page of charging sessions, most recent first."""

@@ -42,6 +42,15 @@
         "name": "Heures creuses"
       }
     },
+    "select": {
+      "charging_mode": {
+        "name": "Mode de charge",
+        "state": {
+          "eco": "Éco",
+          "continuous": "Continu"
+        }
+      }
+    },
     "sensor": {
       "energy_total": {
         "name": "Énergie totale"
@@ -107,6 +116,17 @@
       "pending_invoices": {
         "name": "Factures en attente"
       }
+    }
+  },
+  "exceptions": {
+    "mode_not_available": {
+      "message": "Tohmo ne permet pas de passer cette borne en mode {mode} pour le moment."
+    },
+    "mode_change_error": {
+      "message": "Impossible de changer le mode de charge : {error}"
+    },
+    "mode_change_failed": {
+      "message": "La borne a refusé de passer en mode {mode}."
     }
   }
 }

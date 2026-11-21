@@ -11,7 +11,7 @@ from homeassistant.helpers.aiohttp_client import async_create_clientsession
 from .api import TohmoClient
 from .coordinator import TohmoConfigEntry, TohmoCoordinator
 
-PLATFORMS = [Platform.BINARY_SENSOR, Platform.SENSOR]
+PLATFORMS = [Platform.BINARY_SENSOR, Platform.SELECT, Platform.SENSOR]
 
 
 def create_client(hass: HomeAssistant, email: str, password: str) -> TohmoClient:

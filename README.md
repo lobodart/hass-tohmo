@@ -35,7 +35,8 @@ Per charging station:
 | Total energy | kWh of all charging sessions (`total_increasing`) |
 | Total cost | sum of billed costs (older sessions without a cost count as 0) |
 | Last session energy / cost / start / end / duration | latest session, with its tariff (peak/off-peak, price per kWh) as attributes |
-| Charging mode | `eco` or `continuous`, with the eco schedule as an attribute |
+| Charging mode (select) | switch between `eco` (charges during off-peak windows only) and `continuous`. Waits for the station to confirm the change. Unavailable when Tohmo does not allow it |
+| Charging mode (sensor) | `eco` or `continuous`, with the eco schedule as an attribute |
 | Off-peak hours | `on` during an eco window, switches at the exact time (usable in automations) |
 | Next off-peak | start of the next eco window (timestamp) |
 | Off-peak N start / end | time (`HH:MM`) of each eco window. Created automatically: if Tohmo adds a window, its entities appear; if a window is removed, its entities become unavailable |
