@@ -4,6 +4,12 @@ Unofficial integration for [Tohmo](https://go-tohmo.com) (formerly Zeplug) EV ch
 
 > Tohmo has no public API. This integration uses the internal API of the customer portal `app.go-tohmo.com`, so any change to the website may break it.
 
+<p align="center">
+  <img src="assets/card-example.png" alt="Example dashboard card showing the charger status, current month energy and cost, off-peak windows and the last charging session" width="360">
+  <br>
+  <em>Example: a custom dashboard card built on this integration's entities (the card itself is not part of this repository).</em>
+</p>
+
 ## Installation
 
 **HACS**:
