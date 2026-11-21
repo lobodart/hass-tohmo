@@ -1,6 +1,6 @@
 # Tohmo for Home Assistant
 
-Unofficial integration for [Tohmo](https://go-tohmo.com) EV charging stations: energy, costs and charger state in Home Assistant.
+Unofficial integration for [Tohmo](https://go-tohmo.com) (formerly Zeplug) EV charging stations: energy, costs and charger state in Home Assistant.
 
 > Tohmo has no public API. This integration uses the internal API of the customer portal `app.go-tohmo.com`, so any change to the website may break it.
 
