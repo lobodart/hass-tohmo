@@ -12,17 +12,19 @@ Unofficial integration for [Tohmo](https://go-tohmo.com) (formerly Zeplug) EV ch
 
 ## Installation
 
-**HACS**:
+Requires Home Assistant 2026.10 or later. The UI is available in English and French.
 
-[![Open in HACS](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=lobodart&repository=hass-tohmo&category=integration)
+**Marketplace** (Home Assistant 2026.11 and later):
 
-or *HACS → ⋮ → Custom repositories*, add `https://github.com/lobodart/hass-tohmo` (type *Integration*). Install **Tohmo**, then restart Home Assistant.
+[![Open in the Marketplace](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=lobodart&repository=hass-tohmo&category=integration)
+
+or *Settings → Marketplace → Add from link*, enter `lobodart/hass-tohmo` (type *Integration*), then select **Install**. The setup opens right away, no restart needed.
+
+**HACS** (Home Assistant 2026.10): *HACS → ⋮ → Custom repositories*, add `https://github.com/lobodart/hass-tohmo` (type *Integration*). Install **Tohmo**, then restart Home Assistant.
 
 **Manual**: copy `custom_components/tohmo` into the `config/custom_components/` folder of Home Assistant, then restart.
 
-Then go to *Settings → Devices & services → Add integration → Tohmo* and enter the email and password of your Tohmo account.
-
-Requires Home Assistant 2026.10 or later. The UI is available in English and French.
+If the setup did not open, go to *Settings → Devices & services → Add integration → Tohmo*. Enter the email and password of your Tohmo account.
 
 ## Entities
 
