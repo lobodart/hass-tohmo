@@ -1,0 +1,112 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Compte Tohmo",
+        "description": "Connectez-vous avec les identifiants de votre espace client Tohmo (app.go-tohmo.com).",
+        "data": {
+          "email": "E-mail",
+          "password": "Mot de passe"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Authentification expirée",
+        "description": "Tohmo a refusé le mot de passe de {email}. Saisissez le mot de passe actuel.",
+        "data": {
+          "password": "Mot de passe"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "E-mail ou mot de passe incorrect",
+      "cannot_connect": "Impossible de joindre Tohmo",
+      "unknown": "Erreur inattendue"
+    },
+    "abort": {
+      "already_configured": "Ce compte est déjà configuré",
+      "reauth_successful": "Réauthentification réussie",
+      "wrong_account": "Ce mot de passe correspond à un autre compte Tohmo."
+    }
+  },
+  "device": {
+    "account": {
+      "name": "Compte Tohmo"
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "charging": {
+        "name": "En charge"
+      },
+      "off_peak": {
+        "name": "Heures creuses"
+      }
+    },
+    "sensor": {
+      "energy_total": {
+        "name": "Énergie totale"
+      },
+      "cost_total": {
+        "name": "Coût total"
+      },
+      "last_session_energy": {
+        "name": "Énergie dernière recharge"
+      },
+      "last_session_cost": {
+        "name": "Coût dernière recharge"
+      },
+      "last_session_start": {
+        "name": "Début dernière recharge"
+      },
+      "last_session_end": {
+        "name": "Fin dernière recharge"
+      },
+      "last_session_duration": {
+        "name": "Durée dernière recharge"
+      },
+      "charging_mode": {
+        "name": "Mode de charge",
+        "state": {
+          "eco": "Éco",
+          "continuous": "Continu"
+        }
+      },
+      "last_heartbeat": {
+        "name": "Dernier signal"
+      },
+      "period_energy": {
+        "name": "Énergie période de facturation"
+      },
+      "period_cost": {
+        "name": "Coût période de facturation"
+      },
+      "period_sessions": {
+        "name": "Recharges période de facturation"
+      },
+      "next_off_peak": {
+        "name": "Prochaines heures creuses"
+      },
+      "off_peak_start": {
+        "name": "Heures creuses {index} début"
+      },
+      "off_peak_end": {
+        "name": "Heures creuses {index} fin"
+      },
+      "subscription_fee": {
+        "name": "Abonnement mensuel"
+      },
+      "price_peak": {
+        "name": "Prix heures pleines"
+      },
+      "price_off_peak": {
+        "name": "Prix heures creuses"
+      },
+      "last_invoice": {
+        "name": "Dernière facture"
+      },
+      "pending_invoices": {
+        "name": "Factures en attente"
+      }
+    }
+  }
+}

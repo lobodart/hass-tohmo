@@ -1,0 +1,112 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Tohmo account",
+        "description": "Sign in with the credentials of your Tohmo customer area (app.go-tohmo.com).",
+        "data": {
+          "email": "Email",
+          "password": "Password"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Authentication expired",
+        "description": "Tohmo rejected the password of {email}. Enter the current password.",
+        "data": {
+          "password": "Password"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Invalid authentication",
+      "cannot_connect": "Failed to connect",
+      "unknown": "Unexpected error"
+    },
+    "abort": {
+      "already_configured": "Account is already configured",
+      "reauth_successful": "Re-authentication was successful",
+      "wrong_account": "This password belongs to another Tohmo account."
+    }
+  },
+  "device": {
+    "account": {
+      "name": "Tohmo account"
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "charging": {
+        "name": "Charging"
+      },
+      "off_peak": {
+        "name": "Off-peak hours"
+      }
+    },
+    "sensor": {
+      "energy_total": {
+        "name": "Total energy"
+      },
+      "cost_total": {
+        "name": "Total cost"
+      },
+      "last_session_energy": {
+        "name": "Last session energy"
+      },
+      "last_session_cost": {
+        "name": "Last session cost"
+      },
+      "last_session_start": {
+        "name": "Last session start"
+      },
+      "last_session_end": {
+        "name": "Last session end"
+      },
+      "last_session_duration": {
+        "name": "Last session duration"
+      },
+      "charging_mode": {
+        "name": "Charging mode",
+        "state": {
+          "eco": "Eco",
+          "continuous": "Continuous"
+        }
+      },
+      "last_heartbeat": {
+        "name": "Last heartbeat"
+      },
+      "period_energy": {
+        "name": "Billing period energy"
+      },
+      "period_cost": {
+        "name": "Billing period cost"
+      },
+      "period_sessions": {
+        "name": "Billing period sessions"
+      },
+      "next_off_peak": {
+        "name": "Next off-peak"
+      },
+      "off_peak_start": {
+        "name": "Off-peak {index} start"
+      },
+      "off_peak_end": {
+        "name": "Off-peak {index} end"
+      },
+      "subscription_fee": {
+        "name": "Monthly subscription"
+      },
+      "price_peak": {
+        "name": "Peak price"
+      },
+      "price_off_peak": {
+        "name": "Off-peak price"
+      },
+      "last_invoice": {
+        "name": "Last invoice"
+      },
+      "pending_invoices": {
+        "name": "Pending invoices"
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "domain": "tohmo",
+  "name": "Tohmo",
+  "codeowners": ["@lobodart"],
+  "config_flow": true,
+  "dependencies": [
+    "recorder"
+  ],
+  "documentation": "https://github.com/lobodart/hass-tohmo",
+  "integration_type": "hub",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/lobodart/hass-tohmo/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}
